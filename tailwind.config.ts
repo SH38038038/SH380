@@ -24,6 +24,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // 👇 이 줄을 추가하세요!
+    require('@tailwindcss/typography'),
+  ],
 };
 export default config;
