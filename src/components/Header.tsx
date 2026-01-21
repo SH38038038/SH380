@@ -3,9 +3,9 @@ import NextImage from "next/image";
 
 const NAV_ITEMS = [
   { name: 'home',   src: '/home.svg',   width: 60, height: 30 }, 
-  { name: 'blog',   src: '/blog.svg',   width: 50, height: 30 },
+  { name: 'blog',   src: '/blog.svg',   width: 50, height: 30 },    
   { name: 'resume', src: '/resume.svg', width: 85, height: 30 },
-  { name: 'tag',    src: '/tag.svg',    width: 40, height: 30 },
+  { name: "contact", src: "/contact.svg", width: 70, height: 30 },
 ];
 
 export default function Header() {
