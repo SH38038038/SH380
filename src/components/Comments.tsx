@@ -1,24 +1,25 @@
-"use client"; // 클라이언트 컴포넌트 선언
+'use client';
 
-import { useEffect, useRef } from "react";
+import Giscus from '@giscus/react';
 
 export default function Comments() {
-  const commentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!commentRef.current || commentRef.current.innerHTML !== "") return;
-
-    const script = document.createElement("script");
-    script.src = "https://utteranc.es/client.js";
-    script.async = true;
-    script.setAttribute("repo", "hong-seohyeon/my-blog-repo"); // [변경필요] 본인 repo 이름
-    script.setAttribute("issue-term", "pathname");
-    script.setAttribute("label", "comment");
-    script.setAttribute("theme", "github-light");
-    script.crossOrigin = "anonymous";
-
-    commentRef.current.appendChild(script);
-  }, []);
-
-  return <div ref={commentRef} className="mt-20 pt-10 border-t border-gray-100" />;
+  return (
+    <section className="mt-10 pt-10 border-t border-gray-200">
+      <Giscus
+        id="comments"
+        repo="sh38038038/sh380"
+        repoId="R_kgDOQ-AKyg"
+        category="Comments"
+        categoryId="DIC_kwDOQ-AKys4C1PPu"
+        mapping="pathname"
+        strict="0"
+        reactionsEnabled="1"
+        emitMetadata="0"
+        inputPosition="bottom"
+        theme="light" // 그냥 'light'로 고정
+        lang="ko"
+        loading="lazy"
+      />
+    </section>
+  );
 }

@@ -2,7 +2,8 @@ import Link from "next/link";
 
 export default function ResumePage() {
   return (
-    <main className="max-w-4xl mx-auto px-6 py-12 md:py-20 text-gray-800">
+    // ✨ 변경점: break-keep 추가 (한글 단어 단위 줄바꿈 보장)
+    <main className="max-w-4xl mx-auto px-6 py-12 md:py-20 text-gray-800 break-keep">
       
       {/* 1. Header Section */}
       <section className="mb-16">
@@ -125,7 +126,7 @@ export default function ResumePage() {
                 <strong>DevOps & CI/CD:</strong> Docker Compose 기반으로 개발/배포 환경을 표준화(Containerization)하고, CI/CD 파이프라인을 구축하여 배포 자동화 달성
                 </li>
             </ul>
-            </div>
+        </div>
 
         {/* Moyora */}
         <div className="mb-12">
