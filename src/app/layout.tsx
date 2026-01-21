@@ -1,36 +1,41 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-// 👇 1. 헤더 컴포넌트를 불러옵니다. (이게 빠져서 안 보였던 거예요!)
+// 👇 1. 헤더 컴포넌트 (기존 유지)
 import Header from "../components/Header"; 
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  // 👇 2. URL 오타 수정 (https://가 두 번 들어가 있었습니다)
+  // 👇 2. URL 설정 (오타 수정됨)
   metadataBase: new URL('https://sh-380.vercel.app'), 
   
   title: {
-    template: '%s | 홍서현 개발자 블로그',
-    default: '홍서현 개발자 블로그',
+    // 서브 페이지에선 "글 제목 | SH380"으로 깔끔하게 보임
+    template: '%s | SH380', 
+    // 메인 페이지 타이틀 (우리가 정한 브랜딩!)
+    default: 'SH380 | 홍서현 기술 블로그', 
   },
   
-  description: '개발자 홍서현의 기술 블로그입니다. Next.js, Java, Springboot 등 개발 지식과 트러블슈팅 경험을 기록합니다.',
+  // 👇 3. 검색 결과 설명 (철학적 문구 + 자기소개)
+  // 구글 검색 결과는 줄바꿈을 무시하므로 자연스럽게 이어지도록 적었습니다.
+  description: 'Ever tried. Ever failed. No matter. Try again. Fail again. Fail better. 낯선 기술의 바다에서 길을 잃는 것을 즐깁니다. 그 과정 끝에 더 나은 답이 있음을 믿기 때문입니다. 백엔드 엔지니어 홍서현의 회고와 기록 공간입니다.',
   
-  keywords: ['홍서현', '개발자 블로그', '기술 블로그', 'Next.js', 'Springboot'],
+  // 키워드 강화 (검색 잘 되게)
+  keywords: ['홍서현','백엔드 개발 블로그','백엔드 기술 블로그', 'SH380', '백엔드', '기술 블로그', 'Spring Boot', 'Kubernetes', 'Next.js', 'docker','backend', 'developer', 'programming', 'web development', 'python', 'server', 'cloud', 'infrastructure'],
 
   openGraph: {
-    title: '홍서현 개발자 블로그',
-    description: '끊임없이 시도하고 기록하는 개발자 홍서현입니다.',
-    // 👇 3. 여기도 URL 오타 수정
+    title: 'SH380 | 홍서현 기술 블로그',
+    // 카톡 공유 시 보일 문구 (핵심 문장 위주)
+    description: '낯선 기술의 바다에서 길을 잃는 것을 즐깁니다. 그 과정 끝에 더 나은 답이 있음을 믿기 때문입니다.',
     url: 'https://sh-380.vercel.app',
-    siteName: '홍서현 블로그',
+    siteName: 'SH380 | 홍서현 기술 블로그',
     locale: 'ko_KR',
     type: 'website',
   },
   
   verification: {
-    google: 'google306e9831b80f8806',
+    google: 'google306e9831b80f8806', // 기존 코드 유지
   },
 
   icons: {
@@ -52,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={inter.className}>
-        {/* 👇 4. body 태그 바로 아래에 헤더를 넣어줍니다 */}
+        {/* 👇 4. 헤더 배치 (기존 유지) */}
         <Header />
         
         {/* 블로그 내용들 */}
