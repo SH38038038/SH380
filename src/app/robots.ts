@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
     },
     // 본인의 도메인으로 변경 필수!
-    sitemap: 'https://https://sh-380.vercel.app/sitemap.xml',
+    sitemap: 'https://sh-380.vercel.app/sitemap.xml',
   };
 }
