@@ -6,7 +6,8 @@ export default function BlogPage() {
   const posts = getSortedPostsData();
 
   return (
-    <main className="flex flex-col gap-16">
+    // ✨ 수정됨: max-w-4xl(너비제한), mx-auto(중앙정렬), px-6(좌우여백), py-12(상하여백) 추가
+    <main className="max-w-4xl mx-auto px-6 py-12 flex flex-col gap-16">
       {posts.map((post) => (
         <Link key={post.id} href={`/blog/${post.id}`}>
           <article className="group flex flex-col md:flex-row items-center gap-10 cursor-pointer border-b border-gray-100 pb-12 last:border-0">
@@ -32,7 +33,6 @@ export default function BlogPage() {
             </div>
             
             <div className="flex-1 text-center md:text-left">
-              {/* ✨ 수정된 부분: group-hover:text-blue-600 -> group-hover:text-[#FFACED] */}
               <h2 className="text-2xl font-bold mb-3 group-hover:text-[#FFACED] transition-colors">
                 {post.title}
               </h2>
