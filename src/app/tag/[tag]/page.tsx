@@ -72,10 +72,10 @@ export default async function TagPostPage({ params }: TagPageProps) {
 
       <div className="mt-16 text-center">
         <Link 
-          href="/" 
+          href="/tag" 
           className="inline-block px-6 py-3 border border-gray-300 rounded-full hover:bg-gray-100 transition-all"
         >
-          메인으로 돌아가기
+          목록으로 돌아가기
         </Link>
       </div>
     </div>
