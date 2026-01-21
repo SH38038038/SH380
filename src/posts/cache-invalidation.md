@@ -3,7 +3,7 @@ title: "캐시 무효화 전략"
 date: "2025-03-31"
 desc: "캐시 무효화 전략에 대해 알아보자"
 tags: ["#CS"]
-thumbnail: "/csgal.png"
+thumbnail: "/cs.svg"
 ---
 
 ![csgal-logo](/csgal.png)

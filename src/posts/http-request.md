@@ -3,7 +3,7 @@ title: "HTTP Request 파이프라이닝"
 date: "2025-03-31"
 desc: "HTTP Request 파이프라이닝에 대해 알아보자"
 tags: ["#CS"]
-thumbnail: "/csgal.png"
+thumbnail: "/cs.svg"
 ---
 
 ![csgal-logo](/csgal.png)

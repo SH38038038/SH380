@@ -3,7 +3,7 @@ title: "Full-Text Index 활용"
 date: "2025-03-31"
 desc: "Full-Text Index 활용하는 법에 대해 알아보자"
 tags: ["#CS"]
-thumbnail: "/csgal.png"
+thumbnail: "/cs.svg"
 ---
 
 ![csgal-logo](/csgal.png)

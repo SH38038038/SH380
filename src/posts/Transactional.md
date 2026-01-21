@@ -3,7 +3,7 @@ title: "@Transactional 이해와 활용"
 date: "2025-03-30"
 desc: "@Transactional에 대해 알아보자"
 tags: ["#CS"]
-thumbnail: "/csgal.png"
+thumbnail: "/cs.svg"
 ---
 
 ![csgal-logo](/csgal.png)

@@ -3,7 +3,7 @@ title: "HTTP와 HTTPS 차이"
 date: "2025-03-30"
 desc: "http와 https 차이에 대해 알아보자"
 tags: ["#CS"]
-thumbnail: "/csgal.png"
+thumbnail: "/cs.svg"
 ---
 
 ![csgal-logo](/csgal.png)

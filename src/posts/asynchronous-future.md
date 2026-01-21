@@ -3,7 +3,7 @@ title: "비동기 처리와 Future 활용"
 date: "2025-03-31"
 desc: "비동기 처리와 Future에 대해 알아보자"
 tags: ["#CS"]
-thumbnail: "/csgal.png"
+thumbnail: "/cs.svg"
 ---
 
 ![csgal-logo](/csgal.png)

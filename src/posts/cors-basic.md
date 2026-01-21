@@ -3,7 +3,7 @@ title: "CORS 이해 및 설정"
 date: "2025-03-31"
 desc: "CORS에 대해 알아보자"
 tags: ["#CS"]
-thumbnail: "/csgal.png"
+thumbnail: "/cs.svg"
 ---
 
 ![csgal-logo](/csgal.png)
