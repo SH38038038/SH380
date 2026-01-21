@@ -12,20 +12,12 @@ export default function ResumePage() {
         </p>
         
         <div className="flex flex-wrap gap-4 text-sm md:text-base text-gray-600">
-          <Link href="mailto:sh38038038@gmail.com" className="hover:text-[#FFACED] transition-colors">
-            Email
-          </Link>
-          <span className="text-gray-300">|</span>
           <Link href="https://github.com/SH38038038" target="_blank" className="hover:text-[#FFACED] transition-colors">
             GitHub
           </Link>
           <span className="text-gray-300">|</span>
           <Link href="https://linkedin.com/in/sh38038038" target="_blank" className="hover:text-[#FFACED] transition-colors">
             LinkedIn
-          </Link>
-          <span className="text-gray-300">|</span>
-          <Link href="https://xyz987164.tistory.com" target="_blank" className="hover:text-[#FFACED] transition-colors">
-            Tech Blog
           </Link>
         </div>
       </section>
@@ -64,6 +56,17 @@ export default function ResumePage() {
             <li><span className="font-semibold">Study & Seminar:</span> Flutter 크로스 플랫폼 스터디, &#34;Spring Boot 구글 소셜 로그인 구현&#34; 기술 세미나 발표</li>
           </ul>
         </div>
+        <div className="mb-8">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
+            <h3 className="text-xl font-bold">SOLUX (Sookmyung Programming Club)</h3>
+            <span className="text-gray-500 text-sm">2025.03 — 2026.02</span>
+          </div>
+          <p className="text-gray-600 mb-4">30기 멤버 / 백엔드 개발</p>
+          <ul className="list-disc list-inside space-y-2 text-gray-700">
+            <li><span className="font-semibold">ICEY:</span> SSE 실시간 알림, gemini api 이용한 컨텐츠 생성, GCP, springboot</li>
+            <li><span className="font-semibold">연등, 연대의 등불 :</span> ELK 기반 검색엔진, redis cache, docker-compose, EC2, nodejs</li>
+          </ul>
+        </div>
       </section>
 
       {/* 4. Projects */}
@@ -99,6 +102,30 @@ export default function ResumePage() {
             <li><strong>IaC:</strong> Docker Compose로 Kafka Cluster, Zookeeper, ELK Stack 등 인프라 코드로 정의</li>
           </ul>
         </div>
+
+        <div className="mb-12">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
+                <h3 className="text-xl font-bold">연등 : 연대의 등불</h3>
+                <span className="text-gray-500 text-sm">2025.10 — Present</span>
+            </div>
+            <p className="text-gray-600 mb-4">
+                각자의 불빛을 모아 거대한 행동의 물결로, 연대활동을 연결하는 플랫폼
+            </p>
+            <ul className="list-disc list-inside space-y-1 text-gray-700 ml-2">
+                <li>
+                <strong>Search Engineering:</strong> Elasticsearch Nori 분석기 튜닝으로 한글 검색 정확도를 개선하고, 자동 완성 및 추천 검색어 시스템 구현
+                </li>
+                <li>
+                <strong>Caching Strategy:</strong> Redis를 도입하여 메인 페이지 등 고빈도 조회 데이터를 캐싱 처리(Serving), DB 부하 감소 및 응답 속도 최적화
+                </li>
+                <li>
+                <strong>Admin Back-office:</strong> 서비스 운영 효율화를 위해 데이터 관리, 콘텐츠 승인 등이 가능한 관리자 대시보드(Admin Dashboard) 구축
+                </li>
+                <li>
+                <strong>DevOps & CI/CD:</strong> Docker Compose 기반으로 개발/배포 환경을 표준화(Containerization)하고, CI/CD 파이프라인을 구축하여 배포 자동화 달성
+                </li>
+            </ul>
+            </div>
 
         {/* Moyora */}
         <div className="mb-12">

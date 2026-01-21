@@ -43,7 +43,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="max-w-3xl mx-auto px-4 py-20 text-gray-800">
+    <main className="max-w-4xl mx-auto px-6 py-12">
         <section className="text-center mb-12">
             {/* 👇 여기 text-gray-600을 text-[#FFACED]로 변경했습니다 */}
             <p className="text-[#FFACED] font-medium">
