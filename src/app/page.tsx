@@ -105,29 +105,34 @@ function TagList({
   tags: string[];
   "aria-hidden"?: boolean;
 }) {
+  const formatTag = (tag: string) => {
+    return tag.startsWith('#') ? tag : `#${tag}`;
+  };
+
   return (
     <div
-      className="flex items-center gap-4 mx-2"
+      className="flex items-center" // gap-4 제거 (아이템 자체 여백 mx-6로 조절)
       aria-hidden={ariaHidden}
     >
       {tags.length > 0
         ? tags.map((tag, index) => (
-            // src/app/page.tsx 의 TagList 컴포넌트 내부
-
-            <Link 
-            key={`${tag}-${ariaHidden ? 'dup' : 'orig'}-${index}`} 
-            // 1. href 수정: 태그 이름을 URL 경로로 보냅니다.
-            // encodeURIComponent는 한글이나 특수문자(# 등)를 URL에서도 안전하게 처리해줍니다.
-            href={`/tag/${encodeURIComponent(tag)}`}
-            className="..." // 기존 클래스 유지
+            <Link
+              key={`${tag}-${ariaHidden ? 'dup' : 'orig'}-${index}`}
+              href={`/tag/${encodeURIComponent(tag)}`}
+              // ✨ 스타일 수정 포인트:
+              // 1. 테두리(border), 배경(bg), 둥글기(rounded) 모두 제거
+              // 2. mx-6: 글자 사이 간격을 넓게 줌
+              // 3. text-gray-500: 기본 회색 -> hover시 진한 검정(text-gray-900)
+              className="mx-6 text-lg font-medium text-gray-500 whitespace-nowrap hover:text-gray-900 transition-colors"
             >
-            {tag}
+              {formatTag(tag)}
             </Link>
           ))
-        : ["#Springboot", "#Java", "#Next.js"].map((tag, index) => (
+        : // 데이터 없을 때 보여줄 예시 태그들도 동일하게 스타일 맞춤
+          ["#Springboot", "#Java", "#Next.js"].map((tag, index) => (
             <span
               key={`${tag}-${index}`}
-              className="px-5 py-2 whitespace-nowrap border border-gray-200 rounded-full text-gray-400 text-lg"
+              className="mx-6 text-lg font-medium text-gray-400 whitespace-nowrap"
             >
               {tag}
             </span>
