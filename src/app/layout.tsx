@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'SH380 | 홍서현 기술 블로그',
     // 카톡 공유 시 보일 문구 (핵심 문장 위주)
-    description: 'Fail Better. 끊임없이 실패하고 다시 나아가는 개발자 홍서현의 기록.',
+    description: '낯선 기술의 바다에서 더 나은 답을 찾아가는 개발자 홍서현입니다.',
     url: 'https://sh-380.vercel.app',
     siteName: 'SH380 | 홍서현 기술 블로그',
     locale: 'ko_KR',
