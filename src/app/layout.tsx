@@ -35,6 +35,16 @@ export const metadata: Metadata = {
   verification: {
     google: 'google306e9831b80f8806', // 아까 파일 이름에 있던 그 숫자코드
   },
+
+  icons: {
+    icon: '/icon.png', // public 폴더에 있는 경우
+    shortcut: '/icon.png',
+    apple: '/apple-icon.png', // 애플 터치 아이콘
+    other: {
+      rel: 'apple-touch-icon-precomposed',
+      url: '/apple-touch-icon-precomposed.png',
+    },
+  },
 };
 
 export default function RootLayout({
