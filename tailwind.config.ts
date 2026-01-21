@@ -1,4 +1,3 @@
-// tailwind.config.ts
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -9,15 +8,20 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      animation: {
+        // 20s는 속도입니다. 숫자가 클수록 느려집니다.
+        'infinite-scroll': 'infinite-scroll 25s linear infinite',
+      },
+      keyframes: {
+        'infinite-scroll': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-100%)' },
+        },
+      },
       fontFamily: {
-        // 로고용 필기체 폰트
         logo: ['var(--font-dancing-script)', 'cursive'], 
-        // 본문용 깔끔한 폰트
         sans: ['var(--font-inter)', 'sans-serif'],
       },
-      borderRadius: {
-        'oval': '50%', // 타원형 이미지를 위한 커스텀 설정
-      }
     },
   },
   plugins: [],

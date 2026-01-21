@@ -24,3 +24,27 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* src/app/globals.css 맨 아래에 추가 */
+
+@layer utilities {
+  /* 애니메이션 클래스 정의 */
+  .animate-infinite-scroll {
+    animation: infinite-scroll 25s linear infinite;
+  }
+  
+  /* 마우스 올렸을 때 멈추는 기능 */
+  .paused {
+    animation-play-state: paused;
+  }
+}
+
+/* 키프레임 정의 */
+@keyframes infinite-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}

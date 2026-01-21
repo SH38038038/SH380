@@ -1,65 +1,137 @@
-import Image from "next/image";
+import Link from "next/link";
+import { getSortedPostsData } from "../lib/posts";
 
 export default function Home() {
+  // 1. 블로그 글에서 태그 추출 및 중복 제거
+  const posts = getSortedPostsData();
+  const allTags = posts.flatMap((post) => post.tags || []);
+  const uniqueTags = Array.from(new Set(allTags));
+
+  // 요청하신 Buddha Bless 아스키 아트
+  const asciiArt = `
+  ⢤⠒⢦⡱⢤⡤⢤⠤⡤⢤⣄⣾⠹⡜⣥⣛⡇⠀⠀⠀⣀⡀⠠⠤⠤⠤⢀⣀⣀⣸⣿⣿⢿⣿⣣⣄⣤⡤⣤⣤⣤⣤⣄⣤⣤⡄⢠⢠⠄⣀
+⠊⠍⠢⢅⠻⣝⢬⢣⢽⣟⣿⣧⠛⡼⣿⢢⡣⢔⠪⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⢿⣿⣿⢻⣿⣭⣭⣿⠉⠉⠉⠉⠉⠉⠉⠁⠀
+⠉⠌⡑⢈⠂⠹⣾⣥⡿⣿⡿⢷⡹⣘⡧⣿⠀⠁⠀⠀⡠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠈⠈⠻⣿⣯⢷⡹⣾⠁⠒⠀⠈⠒⡆⠀⠀⠀
+⠈⠄⠐⠠⠈⢀⠯⠋⣰⠺⣌⠳⡴⣹⡷⢁⠂⠀⠀⣐⠀⠀⠀⢀⠀⠀⠀⡀⠀⠈⠄⠀⠀⠠⡀⠀⠈⢙⠳⢏⡿⣦⡄⠀⠀⠀⠀⠂⠠⠀
+⠀⠂⠈⣠⠔⡋⢠⡾⣡⢛⠴⣋⢴⣯⣀⠎⢀⠀⢠⠄⠀⠀⠀⡸⠀⠀⠀⡇⡄⠀⢘⡀⠀⠀⡐⡀⠀⢄⠑⡶⠴⢞⣷⡀⠀⠀⠀⠀⠀⠀
+⠓⠶⠭⢤⢮⢰⡿⡱⣱⢊⣷⣼⡿⡀⡏⠀⠘⠀⡜⠀⢀⠄⢠⡇⠀⠀⢰⢹⢰⠀⠈⣳⡀⠀⠠⡘⡀⠀⠱⡈⢄⠢⣌⠳⣀⠀⠀⠀⠀⠀
+⠀⠀⣰⠏⠶⣿⣷⣷⣷⣿⡿⣿⡇⢹⠀⠀⠀⢰⠁⠀⡸⠀⠉⡇⠀⠀⡎⢀⡎⣇⠀⢸⢱⠆⠀⢷⢰⠀⠸⢰⣆⠱⡈⣿⣆⡱⣶⣶⣀⣀
+⣠⣾⠏⣼⡄⠀⢸⣼⣿⡿⣽⢻⡴⡟⡀⠀⠀⢸⠀⣠⠇⢸⠡⡇⠀⣇⠁⠀⠲⣋⡄⠈⡔⣻⠀⠸⣇⠀⠀⣇⢫⠉⢺⠙⢿⣿⣮⣷⣛⢾
+⠻⡟⣸⡇⡇⠀⢸⣯⣿⠱⣿⢩⢷⡇⡇⠀⢀⣟⡰⢻⢀⠇⠀⢳⠀⡏⠀⠀⠀⠹⠘⣆⡆⠁⣧⢸⠸⡄⠀⢸⡄⢇⠀⢷⡌⠿⣽⣫⢽⠎
+⢀⢱⢿⣧⠇⠀⠸⣿⢣⢻⣇⠳⢪⡇⢸⠀⠨⣿⠁⢸⡜⠀⠀⠈⡆⠁⠀⠀⠀⠀⠀⠸⠇⠀⢹⣸⡇⡇⠀⢸⣧⠘⢡⢸⠘⡜⡈⠙⠃⠀
+⠈⡆⠀⢹⣻⠀⣘⣇⣯⣲⣍⣺⡱⡞⠈⣆⠀⢷⠀⠀⠁⠀⠀⠀⠈⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⢳⢧⠀⡼⣛⡆⣿⢸⠀⢱⢇⠀⠀⠀
+⠀⠀⠀⠸⣹⣷⢼⣿⣏⢿⢡⠹⣷⣹⡆⠈⢦⡈⠞⠒⠒⠒⠚⠋⠉⠀⠀⠀⠀⠀⠙⠛⠛⠋⢁⣷⡩⡗⢠⡿⣭⣧⢿⠾⠀⠀⡇⠀⠀⠀
+⠀⠀⠀⠀⢿⠘⣶⢹⠏⠈⢞⠀⠈⠛⣿⣄⠘⢿⠮⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⢸⣱⢏⡟⡽⢿⡏⢸⠇⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠈⢇⠈⠻⣧⠀⠸⠀⠀⠀⠙⣿⢦⡌⢷⢄⡀⠀⠀⠀⠀⠀⠀⠀⠠⠀⠀⠀⠀⡠⠃⣜⣿⠎⠀⡇⠘⣟⡌⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⠀⠀⠀⠀⠀⠈⠣⢙⣿⣂⡈⠑⡤⢀⡀⠀⠀⠀⠀⢀⡠⠔⠉⠀⢰⠟⠁⠀⠀⠁⠀⠹⡇⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⣿⣿⣧⣤⣀⣉⣉⣿⠷⠾⢆⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡴⠂⠀⠀⠛⠻⣿⠛⠛⠻⠿⠿⡿⡍⠀⠀⠠⢑⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡜⠀⠀⠀⠀⠀⠀⢻⢃⠩⠂⠨⠤⡝⠐⠐⠁⡄⠂⠿⣎⠉⠉⠙⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡰⠀⠀⠀⠀⠀⠀⠀⢸⠘⠀⠀⠀⢀⠁⠀⠀⠸⠀⠀⢹⠌⡄⠀⠀⠘⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⠁⠀⠀⠀⠀⠀⠀⠀⢸⡆⡇⠀⡀⠸⠀⠀⠀⢰⠀⠀⠀⣸⢀⠀⠀⠀⢱⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠁⠀⠀⠀⠀⠀⠀⠀⠀⠘⡤⠷⠁⡠⡆⠀⠀⠀⣜⠄⠀⠀⣃⡈⢢⠀⠀⠈⢢⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⡎⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢣⢐⠥⠊⠋⠵⢶⠃⠀⢱⠶⠋⠊⠢⡑⡆⠀⠀⠀⢱⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢄⠀⠀⠀⠀⣀⣀⣀⣀⣤⠒⠋⠁⠀⠀⠀⠀⡈⠀⠀⢸⠀⠀⠀⠀⠈⠣⡀⠀⢀⡜⠁⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠂⡴⠿⡟⠉⠉⡏⠙⢻⡿⠁⠀⡀⠀⠀⡇⠀⠀⢸⡀⠀⠀⠀⢠⢤⠌⡽⢇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡴⣀⣀⣦⣄⣀⣶⡟⠁⠁⠀⠁⣥⡰⡿⠀⠀⠀⠘⢇⠼⠑⠤⠸⠈⢦⣥⣴⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⢀⣀⢀⡀⡀⠀⠀⠀⢠⣤⣿⣿⠳⢾⡟⠁⠀⠀⠀⠀⡼⠃⠁⡄⡄⠀⠀⠀⠀⠀⢇⠀⠀⠀⠈⢻⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀
+
+`;
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="max-w-4xl mx-auto px-6 py-12">
+      {/* 1. 소개 텍스트 영역 */}
+      <section className="mb-16 text-lg leading-relaxed text-gray-600 font-light">
+        <div className="space-y-1 mb-4">
+          <p className="font-bold text-gray-900">
+            Ever tried. Ever failed. No matter. Try again. Fail again. Fail better.<br />
+          </p><br />
+          <p>
+            낯선 기술의 바다에서 길을 잃는 것을 즐깁니다.
+            <br />
+            그 과정 끝에 더 나은 답이 있음을 믿기 때문입니다.
+          </p>
+          <p>
+            안녕하세요 저는{" "}
+            <span className="text-[#FFACED] font-bold">개발자 홍서현 </span>입니다.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* 2. 태그 목록 영역 (무한 스크롤 애니메이션) */}
+      <section className="w-full overflow-hidden mb-24">
+        <div className="inline-flex w-full flex-nowrap overflow-hidden">
+          {/* animate-infinite-scroll 및 hover 일시정지 */}
+          <div className="flex items-center animate-infinite-scroll hover:[animation-play-state:paused]">
+            
+            {/* --- 첫 번째 리스트 (원본) --- */}
+            <TagList tags={uniqueTags} />
+
+            {/* --- 두 번째 리스트 (복제본) --- */}
+            {/* 수정됨: "true" -> {true} */}
+            <TagList tags={uniqueTags} aria-hidden={true} />
+            
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* 3. 아스키 아트 (부적) 영역 */}
+      <section className="flex justify-center mb-12">
+        <div className="w-full max-w-2xl bg-white p-8 rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+          <div className="overflow-x-auto scrollbar-hide flex justify-center">
+            <pre
+              className="font-mono text-xs sm:text-sm leading-tight whitespace-pre select-all"
+              style={{ color: "#FFACED" }}
+            >
+              {asciiArt}
+            </pre>
+          </div>
+          <p className="text-center text-xs text-gray-400 mt-6 font-mono">
+              /* shape me */
+            </p>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+// -------------------------------------------------------------------------
+// Helper Component
+// -------------------------------------------------------------------------
+function TagList({
+  tags,
+  "aria-hidden": ariaHidden,
+}: {
+  tags: string[];
+  "aria-hidden"?: boolean;
+}) {
+  return (
+    <div
+      className="flex items-center gap-4 mx-2"
+      aria-hidden={ariaHidden}
+    >
+      {tags.length > 0
+        ? tags.map((tag, index) => (
+            // src/app/page.tsx 의 TagList 컴포넌트 내부
+
+            <Link 
+            key={`${tag}-${ariaHidden ? 'dup' : 'orig'}-${index}`} 
+            // 1. href 수정: 태그 이름을 URL 경로로 보냅니다.
+            // encodeURIComponent는 한글이나 특수문자(# 등)를 URL에서도 안전하게 처리해줍니다.
+            href={`/tag/${encodeURIComponent(tag)}`}
+            className="..." // 기존 클래스 유지
+            >
+            {tag}
+            </Link>
+          ))
+        : ["#Springboot", "#Java", "#Next.js"].map((tag, index) => (
+            <span
+              key={`${tag}-${index}`}
+              className="px-5 py-2 whitespace-nowrap border border-gray-200 rounded-full text-gray-400 text-lg"
+            >
+              {tag}
+            </span>
+          ))}
     </div>
   );
 }
