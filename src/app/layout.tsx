@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 // ⬇️ 이 부분을 수정하세요!
 export const metadata: Metadata = {
   // 1. 사이트 기본 주소 (배포된 Vercel 주소나 도메인 입력 필수)
-  metadataBase: new URL('https://본인의-배포-도메인.vercel.app'), 
+  metadataBase: new URL('https://https://sh-380.vercel.app'), 
   
   // 2. 제목 설정
   title: {
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: '홍서현 개발자 블로그',
     description: '끊임없이 시도하고 기록하는 개발자 홍서현입니다.',
-    url: 'https://본인의-배포-도메인.vercel.app',
+    url: 'https://https://sh-380.vercel.app',
     siteName: '홍서현 블로그',
     locale: 'ko_KR',
     type: 'website',
