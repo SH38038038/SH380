@@ -2,7 +2,7 @@
 title: "채식탁 프로젝트 회고"
 date: "2025-02-28"
 desc: "GDG on Campus sookmyung 챕터에 참가하며 진행했던 연합 프로젝트에 대한 회고."
-tags: ["#project", "springboot", "review"]
+tags: ["#project", "#springboot", "#review"]
 thumbnail: "/project-review.svg"
 ---
 ![chaesiktak-view](/chaesiktak-view.png)
