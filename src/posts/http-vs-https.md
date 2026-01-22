@@ -1,6 +1,6 @@
 ---
 title: "HTTP와 HTTPS 차이"
-date: "2025-03-30"
+date: "2025-01-31"
 desc: "http와 https 차이에 대해 알아보자"
 tags: ["#CS"]
 thumbnail: "/cs.svg"

@@ -3,7 +3,7 @@ title: "Springboot 순환참조 문제"
 date: "2025-08-19"
 desc: "springboot에서 순환 참조 오류가 발생하였다. "
 tags: ["#Springboot", "#server", "#Troubleshooting"]
-thumbnail: "/thumbnail.svg"
+thumbnail: "/ts.svg"
 ---
 
 ![springboot-logo](/springboot.png)

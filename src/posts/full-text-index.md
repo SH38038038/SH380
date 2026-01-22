@@ -34,7 +34,7 @@ thumbnail: "/cs.svg"
 ​
 -   **RDBMS 예제 (MySQL)**
 ​
-```
+```SQL
 -- Full-Text Index 생성
 CREATE FULLTEXT INDEX idx_content ON posts(content);
 ​
@@ -92,7 +92,7 @@ GET /posts/_search
 
 ![full-text-index-graph](/full-text-index-graph.png)
 
-    # 4\. 면접 대비 핵심 포인트
+# 4\. 면접 대비 핵심 포인트
 
 -   Full-Text Index 원리: 토큰화 + 역색인
 -   RDBMS Full-Text vs 일반 인덱스 차이

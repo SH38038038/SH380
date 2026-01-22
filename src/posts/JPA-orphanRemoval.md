@@ -3,7 +3,7 @@ title: "Test Data 삽입 시 JPA 컬렉션 초기화 문제"
 date: "2025-08-19"
 desc: "Test Data 삽입 시 JPA 컬렉션이 초기화 되는 문제가 발생하였다."
 tags: ["#Springboot", "JPA", "#server", "#Troubleshooting"]
-thumbnail: "/thumbnail.svg"
+thumbnail: "/ts.svg"
 ---
 
 ```textplain

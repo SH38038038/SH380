@@ -2,7 +2,7 @@
 title: "Spring Boot로 실시간 채팅 구현하기 (WebSocket + STOMP)"
 date: "2025-09-01"
 desc: "springboot환경에서 WebSocket을 이용한 실시간 채팅방을 만들어보자"
-tags: ["#Springboot", "#server", "#WebSocket", "STOMP"]
+tags: ["#Springboot", "#server", "#WebSocket", "#STOMP"]
 thumbnail: "/thumbnail.svg"
 ---
 

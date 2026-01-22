@@ -2,7 +2,7 @@
 title: "[Project Technical Report] News-Archive: Event-Driven 데이터 파이프라인 및 비동기 검색 엔진 구축"
 date: "2025-12-19"
 desc: "elastic search 공부를 위해 진행한 데이터 파이프라인 및 비동기 검색엔진 구축기 입니다."
-tags: ["#report", "Elasticsearch", "docker"]
+tags: ["#report", "#Elasticsearch", "#docker"]
 thumbnail: "/project-review.svg"
 ---
 [news-archive-BE repository](https://github.com/SH38038038/news-archive-BE)

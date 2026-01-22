@@ -3,7 +3,7 @@ title: "SQL 기반 검색에서 LazyInitializationException 발생 문제"
 date: "2025-08-19"
 desc: "SQL 기반 검색에서 LazyInitializationException 발생 문제가 발생하였다. "
 tags: ["#SQL", "#Troubleshooting"]
-thumbnail: "/thumbnail.svg"
+thumbnail: "/ts.svg"
 ---
 
 ## 문제 원인

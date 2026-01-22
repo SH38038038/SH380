@@ -2,7 +2,7 @@
 title: "[Project Technical Report] Dev-Helper: Kubernetes 기반 고가용성 MSA 아키텍처 구축"
 date: "2025-12-21"
 desc: "kubetnetes 기반 클라우드 컴퓨팅 프로젝트 회고록입니다. "
-tags: ["#report", "kubernetes", "docker"]
+tags: ["#report", "#kubernetes", "#docker"]
 thumbnail: "/project-review.svg"
 ---
 

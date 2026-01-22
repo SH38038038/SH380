@@ -1,6 +1,6 @@
 ---
 title: "CORS 이해 및 설정"
-date: "2025-03-31"
+date: "2025-01-31"
 desc: "CORS에 대해 알아보자"
 tags: ["#CS"]
 thumbnail: "/cs.svg"
@@ -12,7 +12,7 @@ thumbnail: "/cs.svg"
 
 -   **CORS 정의**  
     Cross-Origin Resource Sharing(CORS)은 브라우저에서 **다른 도메인, 포트, 프로토콜로부터 리소스를 요청할 때 발생하는 보안 정책**입니다.  
-    기본적으로 브라우저는 **동일 출처 정책(Same-Origin Policy)**을 적용하여 다른 출처의 리소스를 차단합니다.
+    기본적으로 브라우저는 **동일 출처 정책(Same-Origin Policy)** 을 적용하여 다른 출처의 리소스를 차단합니다.
 -   **구성 요소**  
     
     | Origin | 요청을 보낸 출처 |
