@@ -6,8 +6,9 @@ tags: ["#project", "#nodejs", "#review"]
 thumbnail: "/project-review.svg"
 ---
 
-<a href="https://yeondeung-b449c.web.app">연등 바로가기</a>
-<a href="https://yeondeung-b449c.web.app">연등 바로가기</a>
-<a href="https://yeondeung-b449c.web.app">연등 바로가기</a>
-<a href="https://yeondeung-b449c.web.app">연등 바로가기</a>
-<a href="https://yeondeung-b449c.web.app">연등 바로가기</a>
+## 🚀 프로젝트 배포 링크
+아래 링크를 클릭하면 배포된 서비스로 이동합니다.
+
+### 👉 [연등 바로가기 (Click)](https://yeondeung-b449c.web.app)
+### 👉 [연등 바로가기 (Click)](https://yeondeung-b449c.web.app)
+### 👉 [연등 바로가기 (Click)](https://yeondeung-b449c.web.app)
