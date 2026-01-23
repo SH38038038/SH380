@@ -6,23 +6,8 @@ tags: ["#project", "#nodejs", "#review"]
 thumbnail: "/project-review.svg"
 ---
 
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
-https://yeondeung-b449c.web.app/
+<a href="https://yeondeung-b449c.web.app">연등 바로가기</a>
+<a href="https://yeondeung-b449c.web.app">연등 바로가기</a>
+<a href="https://yeondeung-b449c.web.app">연등 바로가기</a>
+<a href="https://yeondeung-b449c.web.app">연등 바로가기</a>
+<a href="https://yeondeung-b449c.web.app">연등 바로가기</a>
