@@ -29,7 +29,7 @@ export default function ResumePage() {
         <h2 className="text-2xl font-bold border-b-2 border-gray-100 pb-2 mb-6">Introduction</h2>
         <div className="space-y-4 text-gray-700 leading-relaxed">
           <p>
-            Python과 Java를 활용하여 대용량 데이터를 안정적으로 처리하는 분산 시스템 설계 및 최적화에 강점이 있는 백엔드 엔지니어입니다.
+            Java와 Python을 활용하여 대용량 데이터를 안정적으로 처리하는 분산 시스템 설계 및 최적화에 강점이 있는 백엔드 엔지니어입니다.
             확장 가능한 아키텍처와 시스템 최적화에 몰입하며, 끊임없는 학습을 통해 서비스의 안정성을 높이는 것을 목표로 합니다.
           </p>
           <ul className="list-disc list-inside ml-2 space-y-1 text-gray-600">
