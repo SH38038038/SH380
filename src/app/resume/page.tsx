@@ -244,14 +244,9 @@ export default function ResumePage() {
             흩어진 연대 활동을 한 곳에 모은 플랫폼 (Backend Lead · Search Owner)
           </p>
           <div className="mt-2 mb-4">
-          <a
-            href="https://yeondeung-b449c.web.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-800 font-medium underline"
-          >
-          프로젝트 바로가기: 연등 플랫폼
-          </a>
+          <Link href="https://yeondeung-b449c.web.app/" target="_blank" className="hover:text-[#FFACED] transition-colors">
+            프로젝트 바로가기: 흩어진 연대를 잇다, 연등
+          </Link>
         </div>
 
 
