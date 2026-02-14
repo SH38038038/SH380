@@ -33,12 +33,12 @@ export default function ResumePage() {
             확장 가능한 아키텍처와 시스템 최적화에 몰입하며, 끊임없는 학습을 통해 서비스의 안정성을 높이는 것을 목표로 합니다.
           </p>
           <ul className="list-disc list-inside ml-2 space-y-1 text-gray-600">
-            <li><strong>Data Engineering:</strong> Kafka와 Elasticsearch 기반의 Event-Driven Architecture 및 비동기 데이터 처리 파이프라인 구축</li>
-            <li><strong>Cloud Infrastructure:</strong> Kubernetes (HPA, CronJob) 및 Docker 환경에서의 고가용성(HA) MSA 운영 및 리소스 최적화</li>
+            <li><strong>Data Engineering:</strong> Kafka와 ES 기반의 Event-Driven Architecture 및 비동기 데이터 처리 파이프라인 구축</li>
+            <li><strong>Cloud Infrastructure:</strong> Kubernetes 및 Docker 환경에서의 고가용성(HA) MSA 운영 및 리소스 최적화</li>
             <li><strong>Intelligent Backend:</strong> Spring Boot 기반의 견고한 RESTful API 설계 및 LLM(OpenAI, Gemini) 모델 서비스 통합</li>
           </ul>
           <p className="mt-4 text-sm text-gray-500">
-            숙명여자대학교 컴퓨터과학전공 졸업 예정 (2026.08) | GPA: 3.86/4.5
+            숙명여자대학교 컴퓨터과학전공 졸업 예정 (2026.08) | GPA: 3.84/4.5
           </p>
         </div>
       </section>
@@ -48,14 +48,13 @@ export default function ResumePage() {
         <h2 className="text-2xl font-bold border-b-2 border-gray-100 pb-2 mb-6">Experience</h2>
         <div className="mb-8">
           <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
-            <h3 className="text-xl font-bold">GDGoC Sookmyung (SMWU Google Developer Groups)</h3>
-            <span className="text-gray-500 text-sm">2024.09 — 2025.06</span>
+            <h3 className="text-xl font-bold">DABIDA</h3>
+            <span className="text-gray-500 text-sm">2025.09 — 2026.02</span>
           </div>
-          <p className="text-gray-600 mb-4">5기 멤버 / 백엔드 개발</p>
+          <p className="text-gray-600 mb-4">산학협력 연구원 / 인턴</p>
           <ul className="list-disc list-inside space-y-2 text-gray-700">
-            <li><span className="font-semibold">채식탁(Chaesiktak):</span> Spring Security, JWT, 외부 AI(LLM) 연동 서버 개발</li>
-            <li><span className="font-semibold">ReCloset:</span> 지속 가능한 의류 기부 플랫폼 백엔드 개발 (GDG Solution Challenge 2025)</li>
-            <li><span className="font-semibold">Study & Seminar:</span> Flutter 크로스 플랫폼 스터디, &#34;Spring Boot 구글 소셜 로그인 구현&#34; 기술 세미나 발표</li>
+            <li><span className="font-semibold">마켓팅 블로그 자동화 :</span> gemini api 이용한 컨텐츠 생성, python 이용한 카드뉴스 생성</li>
+            <li><span className="font-semibold">프론트엔드 개발 :</span> replit 기반 협업</li>
           </ul>
         </div>
         <div className="mb-8">
@@ -69,6 +68,19 @@ export default function ResumePage() {
             <li><span className="font-semibold">연등, 연대의 등불 :</span> ELK 기반 검색엔진, redis cache, docker-compose, EC2, nodejs</li>
           </ul>
         </div>
+        <div className="mb-8">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
+            <h3 className="text-xl font-bold">GDGoC Sookmyung (SMWU Google Developer Groups)</h3>
+            <span className="text-gray-500 text-sm">2024.09 — 2025.06</span>
+          </div>
+          <p className="text-gray-600 mb-4">5기 멤버 / 백엔드 개발</p>
+          <ul className="list-disc list-inside space-y-2 text-gray-700">
+            <li><span className="font-semibold">채식탁(Chaesiktak):</span> Spring Security, JWT, 외부 AI(LLM) 연동 서버 개발</li>
+            <li><span className="font-semibold">ReCloset:</span> 지속 가능한 의류 기부 플랫폼 백엔드 개발 (GDG Solution Challenge 2025)</li>
+            <li><span className="font-semibold">Study & Seminar:</span> Flutter 크로스 플랫폼 스터디, &#34;Spring Boot 구글 소셜 로그인 구현&#34; 기술 세미나 발표</li>
+          </ul>
+        </div>
+        
       </section>
       
       {/* 4. Projects */}
