@@ -1,142 +1,101 @@
-import Link from "next/link";
-import { getSortedPostsData } from "../lib/posts";
+"use client";
+
+import { useEffect, useRef } from "react";
 
 export default function Home() {
-  // 1. 블로그 글에서 태그 추출 및 중복 제거
-  const posts = getSortedPostsData();
-  const allTags = posts.flatMap((post) => post.tags || []);
-  const uniqueTags = Array.from(new Set(allTags));
+  // 마우스가 글자 위에 있는지 여부와 현재 좌표를 기억할 공간
+  const isHovering = useRef(false);
+  const mousePos = useRef({ x: 0, y: 0 });
 
-  // 요청하신 Buddha Bless 아스키 아트
-  const asciiArt = `
-  ⢤⠒⢦⡱⢤⡤⢤⠤⡤⢤⣄⣾⠹⡜⣥⣛⡇⠀⠀⠀⣀⡀⠠⠤⠤⠤⢀⣀⣀⣸⣿⣿⢿⣿⣣⣄⣤⡤⣤⣤⣤⣤⣄⣤⣤⡄⢠⢠⠄⣀
-⠊⠍⠢⢅⠻⣝⢬⢣⢽⣟⣿⣧⠛⡼⣿⢢⡣⢔⠪⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⢿⣿⣿⢻⣿⣭⣭⣿⠉⠉⠉⠉⠉⠉⠉⠁⠀
-⠉⠌⡑⢈⠂⠹⣾⣥⡿⣿⡿⢷⡹⣘⡧⣿⠀⠁⠀⠀⡠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠈⠈⠻⣿⣯⢷⡹⣾⠁⠒⠀⠈⠒⡆⠀⠀⠀
-⠈⠄⠐⠠⠈⢀⠯⠋⣰⠺⣌⠳⡴⣹⡷⢁⠂⠀⠀⣐⠀⠀⠀⢀⠀⠀⠀⡀⠀⠈⠄⠀⠀⠠⡀⠀⠈⢙⠳⢏⡿⣦⡄⠀⠀⠀⠀⠂⠠⠀
-⠀⠂⠈⣠⠔⡋⢠⡾⣡⢛⠴⣋⢴⣯⣀⠎⢀⠀⢠⠄⠀⠀⠀⡸⠀⠀⠀⡇⡄⠀⢘⡀⠀⠀⡐⡀⠀⢄⠑⡶⠴⢞⣷⡀⠀⠀⠀⠀⠀⠀
-⠓⠶⠭⢤⢮⢰⡿⡱⣱⢊⣷⣼⡿⡀⡏⠀⠘⠀⡜⠀⢀⠄⢠⡇⠀⠀⢰⢹⢰⠀⠈⣳⡀⠀⠠⡘⡀⠀⠱⡈⢄⠢⣌⠳⣀⠀⠀⠀⠀⠀
-⠀⠀⣰⠏⠶⣿⣷⣷⣷⣿⡿⣿⡇⢹⠀⠀⠀⢰⠁⠀⡸⠀⠉⡇⠀⠀⡎⢀⡎⣇⠀⢸⢱⠆⠀⢷⢰⠀⠸⢰⣆⠱⡈⣿⣆⡱⣶⣶⣀⣀
-⣠⣾⠏⣼⡄⠀⢸⣼⣿⡿⣽⢻⡴⡟⡀⠀⠀⢸⠀⣠⠇⢸⠡⡇⠀⣇⠁⠀⠲⣋⡄⠈⡔⣻⠀⠸⣇⠀⠀⣇⢫⠉⢺⠙⢿⣿⣮⣷⣛⢾
-⠻⡟⣸⡇⡇⠀⢸⣯⣿⠱⣿⢩⢷⡇⡇⠀⢀⣟⡰⢻⢀⠇⠀⢳⠀⡏⠀⠀⠀⠹⠘⣆⡆⠁⣧⢸⠸⡄⠀⢸⡄⢇⠀⢷⡌⠿⣽⣫⢽⠎
-⢀⢱⢿⣧⠇⠀⠸⣿⢣⢻⣇⠳⢪⡇⢸⠀⠨⣿⠁⢸⡜⠀⠀⠈⡆⠁⠀⠀⠀⠀⠀⠸⠇⠀⢹⣸⡇⡇⠀⢸⣧⠘⢡⢸⠘⡜⡈⠙⠃⠀
-⠈⡆⠀⢹⣻⠀⣘⣇⣯⣲⣍⣺⡱⡞⠈⣆⠀⢷⠀⠀⠁⠀⠀⠀⠈⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⢳⢧⠀⡼⣛⡆⣿⢸⠀⢱⢇⠀⠀⠀
-⠀⠀⠀⠸⣹⣷⢼⣿⣏⢿⢡⠹⣷⣹⡆⠈⢦⡈⠞⠒⠒⠒⠚⠋⠉⠀⠀⠀⠀⠀⠙⠛⠛⠋⢁⣷⡩⡗⢠⡿⣭⣧⢿⠾⠀⠀⡇⠀⠀⠀
-⠀⠀⠀⠀⢿⠘⣶⢹⠏⠈⢞⠀⠈⠛⣿⣄⠘⢿⠮⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⢸⣱⢏⡟⡽⢿⡏⢸⠇⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠈⢇⠈⠻⣧⠀⠸⠀⠀⠀⠙⣿⢦⡌⢷⢄⡀⠀⠀⠀⠀⠀⠀⠀⠠⠀⠀⠀⠀⡠⠃⣜⣿⠎⠀⡇⠘⣟⡌⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⠀⠀⠀⠀⠀⠈⠣⢙⣿⣂⡈⠑⡤⢀⡀⠀⠀⠀⠀⢀⡠⠔⠉⠀⢰⠟⠁⠀⠀⠁⠀⠹⡇⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⣿⣿⣧⣤⣀⣉⣉⣿⠷⠾⢆⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡴⠂⠀⠀⠛⠻⣿⠛⠛⠻⠿⠿⡿⡍⠀⠀⠠⢑⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡜⠀⠀⠀⠀⠀⠀⢻⢃⠩⠂⠨⠤⡝⠐⠐⠁⡄⠂⠿⣎⠉⠉⠙⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡰⠀⠀⠀⠀⠀⠀⠀⢸⠘⠀⠀⠀⢀⠁⠀⠀⠸⠀⠀⢹⠌⡄⠀⠀⠘⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⠁⠀⠀⠀⠀⠀⠀⠀⢸⡆⡇⠀⡀⠸⠀⠀⠀⢰⠀⠀⠀⣸⢀⠀⠀⠀⢱⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠁⠀⠀⠀⠀⠀⠀⠀⠀⠘⡤⠷⠁⡠⡆⠀⠀⠀⣜⠄⠀⠀⣃⡈⢢⠀⠀⠈⢢⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⡎⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢣⢐⠥⠊⠋⠵⢶⠃⠀⢱⠶⠋⠊⠢⡑⡆⠀⠀⠀⢱⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢄⠀⠀⠀⠀⣀⣀⣀⣀⣤⠒⠋⠁⠀⠀⠀⠀⡈⠀⠀⢸⠀⠀⠀⠀⠈⠣⡀⠀⢀⡜⠁⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠂⡴⠿⡟⠉⠉⡏⠙⢻⡿⠁⠀⡀⠀⠀⡇⠀⠀⢸⡀⠀⠀⠀⢠⢤⠌⡽⢇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡴⣀⣀⣦⣄⣀⣶⡟⠁⠁⠀⠁⣥⡰⡿⠀⠀⠀⠘⢇⠼⠑⠤⠸⠈⢦⣥⣴⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⢀⣀⢀⡀⡀⠀⠀⠀⢠⣤⣿⣿⠳⢾⡟⠁⠀⠀⠀⠀⡼⠃⠁⡄⡄⠀⠀⠀⠀⠀⢇⠀⠀⠀⠈⢻⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀
+  // 1. 계속 쏟아지는 무한 루프 로직
+  useEffect(() => {
+    // 30ms 간격으로 계속 실행 (숫자를 줄이면 더 미친듯이 쏟아집니다)
+    const interval = setInterval(() => {
+      // 마우스가 글자 위에 없으면 멈춤
+      if (!isHovering.current) return;
 
-`;
+      const particle = document.createElement("div");
+      particle.className = "plus-particle";
+      particle.textContent = "+";
+      
+      // 기억해둔 마우스 좌표에서 생성
+      particle.style.left = `${mousePos.current.x}px`;
+      particle.style.top = `${mousePos.current.y}px`;
+      
+      const spreadX = (Math.random() - 0.5) * 80;
+      const spreadY = Math.random() * 80 + 40;
+      
+      particle.style.setProperty("--spread-x", `${spreadX}px`);
+      particle.style.setProperty("--spread-y", `${spreadY}px`);
 
-  return (
-    <div className="max-w-4xl mx-auto px-6 py-12">
-      {/* 1. 소개 텍스트 영역 */}
-      <section className="mb-16 text-lg leading-relaxed text-gray-600 font-light">
-        <div className="space-y-1 mb-4">
-          <p className="font-bold text-gray-900">
-            Ever tried. Ever failed. No matter. Try again. Fail again. Fail better.<br />
-          </p><br />
-          <p>
-            낯선 기술의 바다에서 길을 잃는 것을 즐깁니다.
-            <br />
-            그 과정 끝에 더 나은 답이 있음을 믿기 때문입니다.
-          </p>
-          <p>
-            안녕하세요 저는{" "}
-            <span className="text-[#FFACED] font-bold">개발자 홍서현 </span>입니다.
-          </p>
-        </div>
-      </section>
+      document.body.appendChild(particle);
 
-      {/* 2. 태그 목록 영역 (무한 스크롤 애니메이션) */}
-      <section className="w-full overflow-hidden mb-24">
-        <div className="inline-flex w-full flex-nowrap overflow-hidden">
-          {/* animate-infinite-scroll 및 hover 일시정지 */}
-          <div className="flex items-center animate-infinite-scroll hover:[animation-play-state:paused]">
-            
-            {/* --- 첫 번째 리스트 (원본) --- */}
-            <TagList tags={uniqueTags} />
+      setTimeout(() => {
+        particle.remove();
+      }, 1000);
+    }, 30); 
 
-            {/* --- 두 번째 리스트 (복제본) --- */}
-            {/* 수정됨: "true" -> {true} */}
-            <TagList tags={uniqueTags} aria-hidden={true} />
-            
-          </div>
-        </div>
-      </section>
+    // 컴포넌트가 꺼질 때 루프 종료
+    return () => clearInterval(interval);
+  }, []);
 
-      {/* 3. 아스키 아트 (부적) 영역 */}
-      <section className="flex justify-center mb-12">
-        <div className="w-full max-w-2xl bg-white p-8 rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-          <div className="overflow-x-auto scrollbar-hide flex justify-center">
-            <pre
-              className="font-mono text-xs sm:text-sm leading-tight whitespace-pre select-all"
-              style={{ color: "#FFACED" }}
-            >
-              {asciiArt}
-            </pre>
-          </div>
-          <p className="text-center text-xs text-gray-400 mt-6 font-mono">
-              /* shape me */
-            </p>
-        </div>
-      </section>
-    </div>
-  );
-}
-
-// -------------------------------------------------------------------------
-// Helper Component
-// -------------------------------------------------------------------------
-function TagList({
-  tags,
-  "aria-hidden": ariaHidden,
-}: {
-  tags: string[];
-  "aria-hidden"?: boolean;
-}) {
-  const formatTag = (tag: string) => {
-    return tag.startsWith('#') ? tag : `#${tag}`;
+  // 2. 글자 단위 분리 헬퍼 함수
+  const splitText = (text: string) => {
+    return text.split("").map((char, idx) => {
+      if (char === " ") return <span key={idx}> </span>;
+      return (
+        <span
+          key={idx}
+          className="transition-colors duration-200 hover:text-[#DAFFEF] cursor-default"
+        >
+          {char}
+        </span>
+      );
+    });
   };
 
   return (
-    <div
-      className="flex items-center" // gap-4 제거 (아이템 자체 여백 mx-6로 조절)
-      aria-hidden={ariaHidden}
-    >
-      {tags.length > 0
-        ? tags.map((tag, index) => (
-            <Link
-              key={`${tag}-${ariaHidden ? 'dup' : 'orig'}-${index}`}
-              href={`/tag/${encodeURIComponent(tag)}`}
-              // ✨ 스타일 수정 포인트:
-              // 1. 테두리(border), 배경(bg), 둥글기(rounded) 모두 제거
-              // 2. mx-6: 글자 사이 간격을 넓게 줌
-              // 3. text-gray-500: 기본 회색 -> hover시 진한 검정(text-gray-900)
-              className="mx-6 text-lg font-medium text-gray-500 whitespace-nowrap hover:text-gray-900 transition-colors"
-            >
-              {formatTag(tag)}
-            </Link>
-          ))
-        : // 데이터 없을 때 보여줄 예시 태그들도 동일하게 스타일 맞춤
-          ["#Springboot", "#Java", "#Next.js"].map((tag, index) => (
-            <span
-              key={`${tag}-${index}`}
-              className="mx-6 text-lg font-medium text-gray-400 whitespace-nowrap"
-            >
-              {tag}
-            </span>
-          ))}
+    <div className="flex items-center justify-center min-h-[70vh] px-6 pb-32 overflow-hidden">
+      
+      <style>{`
+        .plus-particle {
+          position: fixed;
+          color: #DAFFEF;
+          font-size: 1.5rem;
+          font-weight: 300;
+          pointer-events: none;
+          z-index: 9999;
+          transform: translate(-50%, -50%);
+          animation: pour 1s ease-out forwards;
+        }
+        
+        @keyframes pour {
+          0% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1) rotate(0deg);
+          }
+          100% {
+            opacity: 0;
+            transform: translate(calc(-50% + var(--spread-x)), calc(-50% + var(--spread-y))) scale(0.5) rotate(180deg);
+          }
+        }
+      `}</style>
+
+      {/* ✨ 핵심 변경 포인트:
+        텍스트 컨테이너에 마우스가 들어오면 true, 나가면 false로 상태를 바꾸고,
+        그 안에서 움직일 때마다 좌표를 실시간으로 업데이트해 줍니다.
+      */}
+      <p 
+        className="text-xl sm:text-3xl font-medium text-black tracking-wider text-justify [text-align-last:justify] w-full max-w-[300px] sm:max-w-[420px] leading-[1.7]"
+        onMouseEnter={() => { isHovering.current = true; }}
+        onMouseLeave={() => { isHovering.current = false; }}
+        onMouseMove={(e) => { mousePos.current = { x: e.clientX, y: e.clientY }; }}
+      >
+        {splitText("Ever tried. Ever failed.")} <br />
+        {splitText("No matter. Try again.")} <br />
+        {splitText("Fail again. Fail better.")}
+      </p>
+      
     </div>
   );
 }

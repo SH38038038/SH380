@@ -46,7 +46,7 @@ export default function ContactPage() {
     <main className="max-w-4xl mx-auto px-6 py-12">
         <section className="text-center mb-12">
             {/* 👇 여기 text-gray-600을 text-[#FFACED]로 변경했습니다 */}
-            <p className="text-[#FFACED] font-medium">
+            <p className="text-gray-400 font-medium">
             아래 양식을 통해 내용을 등록해주시면, 빠르게 연락드리도록 하겠습니다.
             <br />
             {/* 영문은 연한 회색(gray-400)으로 두어 계층을 주었으나, 

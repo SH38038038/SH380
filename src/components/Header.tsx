@@ -1,64 +1,46 @@
 import Link from "next/link";
-import NextImage from "next/image";
 
 const NAV_ITEMS = [
-  { name: 'home',   src: '/home.svg',   width: 60, height: 30 }, 
-  { name: 'blog',   src: '/blog.svg',   width: 50, height: 30 },    
-  { name: 'resume', src: '/resume.svg', width: 85, height: 30 },
-  { name: "contact", src: "/contact.svg", width: 70, height: 30 },
+  { name: 'home', label: 'home', path: '/' },
+  { name: 'work', label: '★work', path: '/blog' },
+  { name: 'contact', label: 'contact', path: '/contact' },
 ];
 
 export default function Header() {
-  // 배경색과 일치하는 색상 코드 (디자인에 맞춰 수정 가능)
-  const BG_COLOR = "#bcfca5"; 
-
   return (
     <div className="mb-24">
-      {/* 1. 상단 메인 영역 (연두색 배경) */}
-      <header 
-        className="flex flex-col md:flex-row justify-between items-center px-10 pt-10 pb-6"
-        style={{ backgroundColor: BG_COLOR }}
-      >
+      <header className="flex flex-col md:flex-row justify-between items-center px-10 pt-10 pb-6 bg-white">
+        
         <Link href="/">
-          <NextImage 
-            src="/SH380.svg"      
-            alt="SH380 Logo"     
-            width={200}          
-            height={70}          
-            className="cursor-pointer hover:opacity-80 transition-opacity" 
-            priority             
-          />
+          <div className="cursor-pointer hover:opacity-70 transition-opacity">
+            {/* ✨ 수정 포인트: 
+                1. inline-block: transform(scale)을 적용하기 위해 필수
+                2. scale-x-[1.5]: 가로로 1.5배 늘려 뚱뚱하게 만듦 (비율은 1.2~2.0 사이에서 조절 가능)
+                3. origin-left: 늘어나는 기준점을 왼쪽으로 설정
+            */}
+            <span 
+              className="inline-block text-6xl sm:text-7xl font-normal tracking-tight text-black select-none scale-x-[1.5] origin-left"
+              style={{ lineHeight: '1' }}
+            >
+              $H
+            </span>
+          </div>
         </Link>
         
-        <nav>
-          <ul className="flex gap-6 items-center">
+        <nav className="mt-8 md:mt-0">
+          <ul className="flex gap-8 sm:gap-10 items-center text-2xl sm:text-3xl font-normal text-black tracking-wide">
             {NAV_ITEMS.map((item) => (
               <li key={item.name}>
-                <Link href={`/${item.name === 'home' ? '' : item.name}`}>
-                  <NextImage
-                    src={item.src}
-                    alt={`${item.name} menu`}
-                    width={item.width}   
-                    height={item.height}
-                    className="w-auto h-auto cursor-pointer hover:opacity-70 transition-opacity"
-                  />
+                <Link href={item.path}>
+                  <span className="cursor-pointer hover:text-gray-500 transition-colors">
+                    {item.label}
+                  </span>
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
       </header>
-
-      {/* 2. 하단 물결 모양 (CSS로 구현) */}
-      <div 
-        className="w-full h-4" // 물결의 높이
-        style={{
-          // 원형 그라데이션을 반복해서 물결 모양 생성
-          backgroundImage: `radial-gradient(circle at 50% 0, ${BG_COLOR} 70%, transparent 71%)`,
-          backgroundSize: "30px 15px", // 물결 하나의 너비와 높이 비율
-          backgroundRepeat: "repeat-x"
-        }}
-      />
     </div>
   );
 }
